@@ -1,0 +1,120 @@
+@left : 33.3333%;
+@top : 66.6666%;
+
+@brd: 4px;
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.container {
+  min-height: 200px;
+}
+
+#grid {
+ 
+  .actual() {
+    background-size: 200%;
+  }
+
+  .cover() {
+    background-size: cover;
+  }
+  
+  .contain() {
+    background-size: contain;
+  }
+
+  .draw() {
+    &:after {
+      border: @brd dotted rgba(255,255,255,1);
+      content: '';
+      top: 0;
+      left: 0;
+      width: @left;
+      height: @top;
+      position: absolute;
+      border-width: 0 @brd @brd 0;
+      background-color: rgba(0, 255, 0, 0.3);
+     }
+    &:before {
+      border: @brd dotted rgba(255,255,255,1);
+      content: '';
+      left: @left;
+      top: @top;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      background-color: rgba(0, 255, 0, 0.3);
+      &:first-child {
+        border-left: 0;
+      }
+    }
+  }
+}
+
+.resp {
+  //content: url('http://3xm.es/responsive/img/img.jpg');
+  display:block;
+  opacity: 0.3;
+  width: 100%;
+  height: auto;
+  background-repeat: no-repeat;
+  border: 10px solid #fff;
+  //Moved to coffee:
+  //background-image:url(http://3xm.es/responsive/img/img.jpg);
+  background-position:@left @top;
+  position: relative;
+  overflow: hidden;
+  #grid > .draw();
+}
+
+.crop {
+  display:block;
+  //background-size: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  float: left;
+  border: 10px solid #fff;
+  background-position:@left @top;
+  position: relative;
+  overflow: hidden;
+  #grid > .draw();
+  //#grid > .contain();
+}
+
+.cover {
+  #grid > .cover();
+}
+
+.contain {
+  #grid > .contain();
+}
+
+.actual {
+  #grid > .actual();
+}
+
+.w60 {
+  width: 60%;
+  content: '';
+}
+
+.w30 {
+  width: 30%;
+  content: '';
+}
+
+.w10 {
+  width: 10%;
+  content: '';
+}
+
+.processed {
+  border-color: red;
+}
